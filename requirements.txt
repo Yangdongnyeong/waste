@@ -1,0 +1,58 @@
+# ============================================================
+# requirements.txt — YOLO26 학습 · 추론 · 실시간 감지 시스템
+# ============================================================
+# 설치 명령어:
+#   pip install -r requirements.txt
+#
+# GPU(CUDA 12.x) 사용 시 PyTorch 별도 설치 권장:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+# ============================================================
+
+# ── Core: YOLO26 (Ultralytics) ──────────────────────────────
+ultralytics>=8.3.0              # YOLO26 포함 최신 Ultralytics
+
+# ── Deep Learning Framework ─────────────────────────────────
+torch>=2.1.0                    # PyTorch (GPU: 위 별도 설치 권장)
+torchvision>=0.16.0             # 이미지 변환 · 데이터 로더
+
+# ── 이미지 처리 ─────────────────────────────────────────────
+opencv-python>=4.8.0            # 실시간 영상 입력 · 바운딩박스 그리기
+Pillow>=10.0.0                  # 이미지 읽기 · 무결성 검사 (PIL img.load)
+
+# ── 수치 연산 ────────────────────────────────────────────────
+numpy>=1.24.0,<2.0.0            # 배열 연산 (<2.0: ONNX export 호환)
+scipy>=1.10.0                   # 통계 · 후처리
+
+# ── 데이터 · 설정 파일 ──────────────────────────────────────
+pyyaml>=6.0                     # data.yaml 파싱
+pandas>=2.0.0                   # results.csv 분석 · 성능 비교표
+polars>=0.20.0                  # Ultralytics 내부 의존성
+
+# ── 시각화 (노트북 · 학습 곡선) ─────────────────────────────
+matplotlib>=3.7.0               # 학습 곡선 · AP 막대그래프
+seaborn>=0.12.0                 # Confusion Matrix 히트맵
+
+# ── Jupyter 노트북 ───────────────────────────────────────────
+jupyter>=1.0.0                  # 노트북 실행 환경
+ipykernel>=6.25.0               # VS Code / JupyterLab 커널
+ipywidgets>=8.0.0               # 진행바 · 인터랙티브 위젯
+
+# ── 모델 모니터링 · 로깅 (선택) ─────────────────────────────
+tensorboard>=2.14.0             # 학습 곡선 실시간 확인
+# wandb>=0.16.0                 # Weights & Biases (주석 해제 시 사용)
+
+# ── ONNX Export ─────────────────────────────────────────────
+onnx>=1.15.0                    # ONNX 포맷 변환
+onnxslim>=0.1.31                # ONNX 모델 최적화 (Ultralytics 의존성)
+# onnxruntime-gpu>=1.17.0       # ONNX 추론 (GPU), CPU만이면 onnxruntime
+
+# ── 실시간 감지 웹/스트림 인터페이스 (선택) ─────────────────
+# streamlit>=1.30.0             # 웹 UI 데모 (주석 해제 시 사용)
+# flask>=3.0.0                  # REST API 서버 (주석 해제 시 사용)
+
+# ── 시스템 모니터링 ──────────────────────────────────────────
+psutil>=5.9.0                   # CPU · 메모리 사용량 모니터링
+requests>=2.31.0                # Ultralytics 가중치 자동 다운로드
+
+# ── 성능 프로파일링 ──────────────────────────────────────────
+ultralytics-thop>=2.0.18        # FLOPs · 파라미터 수 계산
