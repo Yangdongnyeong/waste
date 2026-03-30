@@ -1,0 +1,17 @@
+# YOLO Dataset — Waste Classification (split dataset)
+# 분할 비율 : train 70% / valid 15% / test 15%
+# 분할 단위 : 세션(1건) 단위 — 동일 물체 train↔valid 교차 방지
+# train 6,998장 / valid 1,502장 / test 1,500장
+
+path: /mnt/c/Users/Brain/github/yolo26_app/waste/data/dataset
+train: train/images
+val:   valid/images
+test:  test/images
+
+nc: 5
+names:
+  0: 고철류
+  1: 비닐
+  2: 유리병
+  3: 캔류
+  4: 형광등
