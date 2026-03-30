@@ -88,7 +88,7 @@ results[0].show()
 
 [3. 실험](#3-실험)
 - [baseline](#0-baseline)
-- [실험 1 : model size & epoch up](#실험-1--model-size--epoch-up)
+- [실험 1 : 경량화 & epoch up](#실험-1--경량화--epoch-up)
 - [실험 2 : class imbalance](#실험-2--class-imbalance)
 - [실험 3 : data quality filter](#실험-3--data-quality-filter)
 
@@ -442,7 +442,7 @@ AI Hub 원본 데이터 (JSON 라벨 + 원천 이미지)
 
 | name | YOLO26 model | epoch | batch | imgsz | mAP50 | mAP50-95 |
 |:----:|:------------:|:-----:|:-----:|:-----:|:-----:|:--------:|
-| baseline | nano | 1 | 32 | 640 | 0.672 | 0.426 |
+| baseline | medium | 1 | 16 | 640 | 0.672 | 0.426 |
 
 > Epoch 1 결과를 baseline으로 설정 (사전학습 가중치 적용 직후 초기 성능)
 > - train/box_loss : 1.171
@@ -450,14 +450,14 @@ AI Hub 원본 데이터 (JSON 라벨 + 원천 이미지)
 
 <br>
 
-## 실험 1 : model size & epoch up
+## 실험 1 : 경량화 & epoch up
 
-> nano → **small** 모델로 교체, epoch 1 → 50으로 증가
+> medium → **small** 모델로 경량화, epoch 1 → 50으로 증가
 
 | name | note | YOLO26 model | epoch | batch | imgsz | mAP50 | mAP50-95 |
 |:----:|:----:|:------------:|:-----:|:-----:|:-----:|:-----:|:--------:|
-| baseline | — | nano | 1 | 32 | 640 | 0.672 | 0.426 |
-| **exp1** | model size ↑ · epoch ↑ | **small** | **50** | 32 | 640 | **0.962** | **0.916** |
+| baseline | — | medium | 1 | 16 | 640 | 0.672 | 0.426 |
+| **exp1** | 경량화 (m→s) · epoch ↑ · batch ↑ | **small** | **50** | 32 | 640 | **0.962** | **0.916** |
 
 **Epoch별 성능 추이**
 
@@ -472,7 +472,8 @@ AI Hub 원본 데이터 (JSON 라벨 + 원천 이미지)
 | 50 | 0.962 | 0.916 | 0.302 |
 
 ### ➜ 실험 1 결과
-- mAP50-95가 **0.426 → 0.916**으로 대폭 상승
+- medium → small로 경량화하고 epoch를 1→50으로 증가한 결과 mAP50-95가 **0.426 → 0.916**으로 대폭 상승
+- small 모델도 충분히 높은 성능 달성 — VRAM 효율(batch 16→32)과 성능 균형 확인
 - **Epoch 40 이후 `close_mosaic` 효과**: mosaic augmentation이 꺼지면서 box_loss가 0.547 → 0.302로 급감 + 성능 도약
 - 10 epoch 단위로 꾸준히 수렴 중 → 더 많은 epoch에서 추가 향상 가능성 있음
 
@@ -487,8 +488,8 @@ AI Hub 원본 데이터 (JSON 라벨 + 원천 이미지)
 
 | name | note | YOLO26 model | epoch | batch | imgsz | mAP50 | mAP50-95 |
 |:----:|:----:|:------------:|:-----:|:-----:|:-----:|:-----:|:--------:|
-| baseline | — | nano | 1 | 32 | 640 | 0.672 | 0.426 |
-| exp1 | model & epoch ↑ | small | 50 | 32 | 640 | 0.962 | 0.916 |
+| baseline | — | medium | 1 | 16 | 640 | 0.672 | 0.426 |
+| exp1 | 경량화 (m→s) · epoch ↑ | small | 50 | 32 | 640 | 0.962 | 0.916 |
 | **exp2** | Augmentation 적용 | small | 50 | 32 | 640 | **0.962** | **0.916** |
 
 ### ➜ 실험 2 결과
@@ -503,8 +504,8 @@ AI Hub 원본 데이터 (JSON 라벨 + 원천 이미지)
 
 | name | note | YOLO26 model | epoch | batch | imgsz | mAP50 | mAP50-95 |
 |:----:|:----:|:------------:|:-----:|:-----:|:-----:|:-----:|:--------:|
-| baseline | — | nano | 1 | 32 | 640 | 0.672 | 0.426 |
-| exp1 | model & epoch ↑ | small | 50 | 32 | 640 | 0.962 | 0.916 |
+| baseline | — | medium | 1 | 16 | 640 | 0.672 | 0.426 |
+| exp1 | 경량화 (m→s) · epoch ↑ | small | 50 | 32 | 640 | 0.962 | 0.916 |
 | exp2 | Augmentation | small | 50 | 32 | 640 | 0.962 | 0.916 |
 | **exp3** | **품질 필터 강화** | small | 50 | 32 | 640 | ✨ **0.9624** ✨ | ✨ **0.9164** ✨ |
 
