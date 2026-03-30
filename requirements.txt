@@ -6,10 +6,13 @@
 #
 # GPU(CUDA 12.x) 사용 시 PyTorch 별도 설치 권장:
 #   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#
+# WSL2 / Ubuntu 환경 — 한글 폰트 (시스템 패키지, pip 아님):
+#   sudo apt-get install -y fonts-nanum && fc-cache -fv
 # ============================================================
 
 # ── Core: YOLO26 (Ultralytics) ──────────────────────────────
-ultralytics>=8.3.0              # YOLO26 포함 최신 Ultralytics
+ultralytics>=8.4.0              # YOLO26 포함 (실험에 사용한 버전: 8.4.27)
 
 # ── Deep Learning Framework ─────────────────────────────────
 torch>=2.1.0                    # PyTorch (GPU: 위 별도 설치 권장)
@@ -21,16 +24,15 @@ Pillow>=10.0.0                  # 이미지 읽기 · 무결성 검사 (PIL img.
 
 # ── 수치 연산 ────────────────────────────────────────────────
 numpy>=1.24.0,<2.0.0            # 배열 연산 (<2.0: ONNX export 호환)
-scipy>=1.10.0                   # 통계 · 후처리
 
 # ── 데이터 · 설정 파일 ──────────────────────────────────────
 pyyaml>=6.0                     # data.yaml 파싱
 pandas>=2.0.0                   # results.csv 분석 · 성능 비교표
-polars>=0.20.0                  # Ultralytics 내부 의존성
+polars>=0.20.0                  # Ultralytics 내부 의존성 (dataset 처리)
 
 # ── 시각화 (노트북 · 학습 곡선) ─────────────────────────────
 matplotlib>=3.7.0               # 학습 곡선 · AP 막대그래프
-seaborn>=0.12.0                 # Confusion Matrix 히트맵
+seaborn>=0.12.0                 # Confusion Matrix 히트맵 (Ultralytics 내부 + 체크 목록)
 
 # ── Jupyter 노트북 ───────────────────────────────────────────
 jupyter>=1.0.0                  # 노트북 실행 환경
@@ -51,7 +53,7 @@ onnxslim>=0.1.31                # ONNX 모델 최적화 (Ultralytics 의존성)
 # flask>=3.0.0                  # REST API 서버 (주석 해제 시 사용)
 
 # ── 시스템 모니터링 ──────────────────────────────────────────
-psutil>=5.9.0                   # CPU · 메모리 사용량 모니터링
+psutil>=5.9.0                   # CPU · 메모리 사용량 모니터링 (Ultralytics 내부 사용)
 requests>=2.31.0                # Ultralytics 가중치 자동 다운로드
 
 # ── 성능 프로파일링 ──────────────────────────────────────────
