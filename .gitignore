@@ -1,0 +1,9 @@
+__pycache__/
+*.pt
+data/org/
+data/images/
+data/images_resize/
+data/dataset/train/
+data/dataset/valid/
+data/dataset/test/
+*.zip
